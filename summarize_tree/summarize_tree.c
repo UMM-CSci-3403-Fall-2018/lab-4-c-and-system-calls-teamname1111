@@ -18,7 +18,14 @@ bool is_dir(const char* path) {
    */
    struct stat sb;
    int i = stat(path, &sb);
-   if(i == 0 && S_ISDIR(sb.st_mode)){
+   //checks that there was not an error running stat, if there was an error
+   //it will print out the error and exit
+   if(i != 0){
+     fprintf(stderr, "There was an error calling stat.\n");
+     exit(1);
+   }
+   //checks if the path is a directory
+   if(S_ISDIR(sb.st_mode)){
    return true;
    } else {
    return false;
@@ -48,6 +55,11 @@ void process_directory(const char* path) {
    num_dirs++;
    //opens path
    direct = opendir(path);
+   //Makes sure there is no issue with opendir
+   if(direct == NULL){
+     fprintf(stderr, "There was an error opening the directory in process_directory.\n");
+     exit(1);
+   }
    //sets path as the working directory
    chdir(path);
    currentdir = readdir(direct);
