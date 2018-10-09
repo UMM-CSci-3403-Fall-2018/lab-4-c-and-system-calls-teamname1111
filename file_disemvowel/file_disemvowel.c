@@ -64,14 +64,14 @@ void disemvowel(FILE* inputFile, FILE* outputFile) {
      */
 
 	//Create a buffer
-	char* in_buffer = (char*) calloc (512, sizeof(char));
-	char* out_buffer = (char*) calloc (512, sizeof(char));
+	char* in_buffer = (char*) calloc (BUF_SIZE, sizeof(char));
+	char* out_buffer = (char*) calloc (BUF_SIZE, sizeof(char));
 
 	//Add contents of file to buffer
-	fread(in_buffer, sizeof(char), 512, inputFile);
+	fread(in_buffer, sizeof(char), BUF_SIZE, inputFile);
 
 	//Takes ONLY non-vowels from in_buffer and puts them in out_buffer
-	int t = copy_non_vowels(512, in_buffer, out_buffer);
+	int t = copy_non_vowels(BUF_SIZE, in_buffer, out_buffer);
         
 	//Writes to the output file
 	fwrite(out_buffer, sizeof(char), t, outputFile);
