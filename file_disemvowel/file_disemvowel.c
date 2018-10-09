@@ -39,8 +39,10 @@ int copy_non_vowels(int num_chars, char* in_buf, char* out_buf) {
      * and this function should return the number of non-vowels that
      * that were copied over.
      */
-
 	int count = 0;
+	//Loops over the string and adds non-vowel characters to the
+	//buffer and adds one to the count each time it comes across
+	//a non-vowel character
  	for(int i = 0; i < num_chars; i++)
  	{
 		if(!isVowel(in_buf[i]) && in_buf[i] != NULL)
@@ -71,6 +73,7 @@ void disemvowel(FILE* inputFile, FILE* outputFile) {
 	//Takes ONLY non-vowels from in_buffer and puts them in out_buffer
 	int t = copy_non_vowels(512, in_buffer, out_buffer);
         
+	//Writes to the output file
 	fwrite(out_buffer, sizeof(char), t, outputFile);
 
 	fclose(outputFile);
@@ -82,7 +85,8 @@ void disemvowel(FILE* inputFile, FILE* outputFile) {
 int main(int argc, char *argv[]) { 
     FILE *inputFile; 
     FILE *outputFile;
-
+    
+    //Determines the case of the input and runs accordingly
     switch(argc)
     {
 	case 1:
@@ -98,7 +102,7 @@ int main(int argc, char *argv[]) {
  	     	outputFile = fopen(argv[2], "w");
 		break;
     }
-
+    //Runs disemvowel
     disemvowel(inputFile, outputFile);
     return 0; 
 }
